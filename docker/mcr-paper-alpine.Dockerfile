@@ -9,7 +9,7 @@ RUN apk add --no-cache --update curl ca-certificates openssl git tar sqlite font
     && chmod +x /runner/ptero.entrypoint.sh
 
 USER container
-ENV  USER=container HOME=/home/container
+ENV  USER=container HOME=/home/container OVERRIDE_JAR_DL_PATH=/home/container/server.jar
 
 WORKDIR /home/container
 
