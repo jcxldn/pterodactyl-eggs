@@ -1,0 +1,36 @@
+{
+    "meta": {
+        "version": "PTDL_v1"
+    },
+    "exported_at": "2020-07-13T06:53:00-00:00",
+    "name": "Geyser (MCR Alpine, Autoupdating)",
+    "author": "ddd@jcx.ovh",
+    "description": "Minecraft Bedrock <--> Java proxy.",
+    "image": "jcxldn/pterodactyl-runners:mcr-geyser-alpine",
+    "startup": "/runner/entrypoint -Xms128M -Xmx{{SERVER_MEMORY}}M",
+    "config": {
+        "files": "{\r\n    \"config.yml\": {\r\n        \"parser\": \"yaml\",\r\n        \"find\": {\r\n            \"bedrock.address\": \"0.0.0.0\",\r\n            \"bedrock.port\": \"{{server.build.default.port}}\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \")! Run /geyser help \",\r\n    \"userInteraction\": [\r\n        \"Go to eula.txt for more info.\"\r\n    ]\r\n}",
+        "logs": "{}",
+        "stop": "geyser stop"
+    },
+    "variables": [
+        {
+            "name": "Branch",
+            "description": "The branch to download Geyser from.",
+            "env_variable": "OVERRIDE_BRANCH",
+            "default_value": "master",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string|max:20"
+        },{
+            "name": "Server Jar File",
+            "description": "The name of the server jarfile to run the server with.",
+            "env_variable": "OVERRIDE_JAR_PATH",
+            "default_value": "server.jar",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string|max:20"
+        }
+    ]
+}

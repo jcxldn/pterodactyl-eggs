@@ -32,7 +32,7 @@ jobs:
           docker buildx build \
             --platform linux/amd64,linux/arm64,linux/armhf,linux/s390x \
             --output "type=image,push=true" \
-            -t jcxldn/pterodactyl-runners:14-jre .
+            -f jre14.Dockerfile -t jcxldn/pterodactyl-runners:14-jre .
   job-mcr-paper-alpine:
     runs-on: ubuntu-latest
     steps:
@@ -58,4 +58,57 @@ jobs:
           docker buildx build \
             --platform linux/amd64 \
             --output "type=image,push=true" \
-            -t jcxldn/pterodactyl-runners:mcr-paper-alpine .
+            -f mcr-paper-alpine.Dockerfile -t jcxldn/pterodactyl-runners:mcr-paper-alpine .
+  job-mcr-waterfall-alpine:
+    runs-on: ubuntu-latest
+    steps:
+      -
+        name: Checkout
+        uses: actions/checkout@v1
+      -
+        name: Login to Docker Hub
+        run: echo "${{ secrets.REGISTRY_PASSWORD }}" | docker login -u "${{ secrets.REGISTRY_USERNAME }}" --password-stdin
+      - 
+        name: Set up Docker Buildx
+        id: buildx
+        uses: crazy-max/ghaction-docker-buildx@v1
+        with:
+          version: latest
+      -
+        name: List Available platforms
+        run: echo ${{ steps.buildx.outputs.platforms }}
+      -
+        name: Run Buildx
+        run: |
+          cd docker
+          docker buildx build \
+            --platform linux/amd64 \
+            --output "type=image,push=true" \
+            -f mcr-waterfall-alpine.Dockerfile -t jcxldn/pterodactyl-runners:mcr-waterfall-alpine .
+
+  job-mcr-geyser-alpine:
+    runs-on: ubuntu-latest
+    steps:
+      -
+        name: Checkout
+        uses: actions/checkout@v1
+      -
+        name: Login to Docker Hub
+        run: echo "${{ secrets.REGISTRY_PASSWORD }}" | docker login -u "${{ secrets.REGISTRY_USERNAME }}" --password-stdin
+      - 
+        name: Set up Docker Buildx
+        id: buildx
+        uses: crazy-max/ghaction-docker-buildx@v1
+        with:
+          version: latest
+      -
+        name: List Available platforms
+        run: echo ${{ steps.buildx.outputs.platforms }}
+      -
+        name: Run Buildx
+        run: |
+          cd docker
+          docker buildx build \
+            --platform linux/amd64 \
+            --output "type=image,push=true" \
+            -f mcr-geyser-alpine.Dockerfile -t jcxldn/pterodactyl-runners:mcr-geyser-alpine .
