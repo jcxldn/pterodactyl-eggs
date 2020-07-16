@@ -2,9 +2,6 @@ FROM jcxldn/minecraft-runners:paper-alpine
 
 MAINTAINER JCX <docker@jcx.ovh>
 
-ARG PRODUCT=paper
-ENV PRODUCT=$PRODUCT
-
 RUN apk add --no-cache --update curl ca-certificates openssl git tar sqlite fontconfig \
     && adduser -D -h /home/container container
 
