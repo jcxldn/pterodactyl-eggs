@@ -7,7 +7,7 @@
     "author": "ddd@jcx.ovh",
     "description": "Minecraft Bedrock <--> Java proxy.",
     "image": "jcxldn/pterodactyl-runners:mcr-geyser-alpine",
-    "startup": "/runner/entrypoint -Xms128M -Xmx{{SERVER_MEMORY}}M",
+    "startup": "/runner/entrypoint -Dterminal.jline=false -Dterminal.ansi=true -Xms128M -Xmx{{SERVER_MEMORY}}M",
     "config": {
         "files": "{\r\n    \"config.yml\": {\r\n        \"parser\": \"yaml\",\r\n        \"find\": {\r\n            \"bedrock.address\": \"0.0.0.0\",\r\n            \"bedrock.port\": \"{{server.build.default.port}}\"\r\n        }\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \")! Run /geyser help \",\r\n    \"userInteraction\": [\r\n        \"Go to eula.txt for more info.\"\r\n    ]\r\n}",

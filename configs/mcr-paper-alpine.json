@@ -7,7 +7,7 @@
     "author": "ddd@jcx.ovh",
     "description": "High performance Spigot fork that aims to fix gameplay and mechanics inconsistencies.",
     "image": "jcxldn/pterodactyl-runners:mcr-paper-alpine",
-    "startup": "/runner/entrypoint -Xms128M -Xmx{{SERVER_MEMORY}}M",
+    "startup": "/runner/entrypoint -Dterminal.jline=false -Dterminal.ansi=true -Xms128M -Xmx{{SERVER_MEMORY}}M",
     "config": {
         "files": "{\r\n    \"server.properties\": {\r\n        \"parser\": \"properties\",\r\n        \"find\": {\r\n            \"server-ip\": \"0.0.0.0\",\r\n            \"server-port\": \"{{server.build.default.port}}\"\r\n        }\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \")! For help, type \",\r\n    \"userInteraction\": [\r\n        \"Go to eula.txt for more info.\"\r\n    ]\r\n}",
