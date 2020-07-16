@@ -2,7 +2,7 @@ FROM jcxldn/minecraft-runners:paper-alpine
 
 MAINTAINER JCX <docker@jcx.ovh>
 
-ARG PRODUCT=paper
+ARG PRODUCT=waterfall
 ENV PRODUCT=$PRODUCT
 
 RUN apk add --no-cache --update curl ca-certificates openssl git tar sqlite fontconfig \
