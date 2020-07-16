@@ -1,0 +1,46 @@
+{
+    "meta": {
+        "version": "PTDL_v1"
+    },
+    "exported_at": "2020-07-13T06:53:00-00:00",
+    "name": "Waterfall (MCR Alpine, Autoupdating)",
+    "author": "ddd@jcx.ovh",
+    "description": "High performance fork of the well-known BungeeCord server teleportation suite.",
+    "image": "jcxldn/pterodactyl-runners:mcr-waterfall-alpine",
+    "startup": "/runner/entrypoint -Xms128M -Xmx{{SERVER_MEMORY}}M",
+    "config": {
+        "files": "{\r\n    \"config.yml\": {\r\n        \"parser\": \"yaml\",\r\n        \"find\": {\r\n            \"listeners[0].host\": \"0.0.0.0:{{server.build.default.port}}\",\r\n            \"servers.*.address\": {\r\n                \"127.0.0.1\": \"{{config.docker.interface}}\",\r\n                \"localhost\": \"{{config.docker.interface}}\"\r\n            }\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"Listening on \",\r\n    \"userInteraction\": [\r\n        \"Listening on \/0.0.0.0:\"\r\n    ]\r\n}",
+        "logs": "{\r\n    \"custom\": false,\r\n    \"location\": \"proxy.log.0\"\r\n}",
+        "stop": "end"
+    },
+    "variables": [
+        {
+            "name": "Minecraft Version",
+            "description": "The version of minecraft (e.g. \"1.16.1\") to download. \r\n\r\nLeave blank to always get the latest version.",
+            "env_variable": "OVERRIDE_VERSION",
+            "default_value": "",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "nullable|string|max:20"
+        },
+        {
+            "name": "Server Jar File",
+            "description": "The name of the server jarfile to run the server with.",
+            "env_variable": "OVERRIDE_JAR_PATH",
+            "default_value": "server.jar",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string|max:20"
+        },
+        {
+            "name": "Build Number",
+            "description": "The build number for the waterfall release.\r\n\r\nLeave at latest to always get the latest version.",
+            "env_variable": "OVERRIDE_BUILD_NUMBER",
+            "default_value": "latest",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string|max:20"
+        }
+    ]
+}
