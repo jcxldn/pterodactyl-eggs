@@ -14,6 +14,13 @@
         "logs": "{}",
         "stop": "geyser stop"
     },
+    "scripts": {
+    	"installation": {
+    		"script": "#!\/bin\/sh\r\necho \"no install script needed!\"\r\nexit 0",
+    		"container": "jcxldn/pterodactyl-runners:mcr-geyser-alpine",
+    		"entrypoint": "sh"
+    	}
+    },
     "variables": [
         {
             "name": "Branch",

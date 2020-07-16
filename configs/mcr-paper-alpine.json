@@ -14,6 +14,13 @@
         "logs": "{}",
         "stop": "stop"
     },
+    "scripts": {
+    	"installation": {
+    		"script": "#!\/bin\/sh\r\necho \"no install script needed!\"\r\nexit 0",
+    		"container": "jcxldn/pterodactyl-runners:mcr-paper-alpine",
+    		"entrypoint": "sh"
+    	}
+    },
     "variables": [
         {
             "name": "Minecraft Version",

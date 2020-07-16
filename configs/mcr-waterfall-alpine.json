@@ -14,6 +14,13 @@
         "logs": "{\r\n    \"custom\": false,\r\n    \"location\": \"proxy.log.0\"\r\n}",
         "stop": "end"
     },
+    "scripts": {
+    	"installation": {
+    		"script": "#!\/bin\/sh\r\necho \"no install script needed!\"\r\nexit 0",
+    		"container": "jcxldn/pterodactyl-runners:mcr-waterfall-alpine",
+    		"entrypoint": "sh"
+    	}
+    },
     "variables": [
         {
             "name": "Minecraft Version",
