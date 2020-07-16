@@ -1,4 +1,4 @@
-FROM jcxldn/minecraft-runners:geyser-alpine
+FROM jcxldn/minecraft-runner:geyser-alpine
 
 MAINTAINER JCX <docker@jcx.ovh>
 

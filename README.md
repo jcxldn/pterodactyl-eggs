@@ -1,2 +1,2 @@
-# pterodacytl-eggs
+# pterodactyl-eggs
 [WOP] Custom eggs for the pterodactyl daemon.

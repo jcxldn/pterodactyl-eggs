@@ -1,4 +1,4 @@
-FROM jcxldn/minecraft-runners:paper-alpine
+FROM jcxldn/minecraft-runner:paper-alpine
 
 MAINTAINER JCX <docker@jcx.ovh>
 
