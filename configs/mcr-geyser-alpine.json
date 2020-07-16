@@ -30,14 +30,6 @@
             "user_viewable": 1,
             "user_editable": 1,
             "rules": "required|string|max:20"
-        },{
-            "name": "Server Jar File",
-            "description": "The name of the server jarfile to run the server with.",
-            "env_variable": "OVERRIDE_JAR_PATH",
-            "default_value": "server.jar",
-            "user_viewable": 1,
-            "user_editable": 1,
-            "rules": "required|string|max:20"
         }
     ]
 }
