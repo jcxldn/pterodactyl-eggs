@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # https://pterodactyl.io/community/config/eggs/creating_a_custom_image.html
 

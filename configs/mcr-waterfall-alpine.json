@@ -17,7 +17,7 @@
     "scripts": {
     	"installation": {
     		"script": "#!\/bin\/sh\r\necho \"no install script needed!\"\r\nexit 0",
-    		"container": "jcxldn/pterodactyl-runners:mcr-waterfall-alpine",
+    		"container": "alpine:3.12",
     		"entrypoint": "sh"
     	}
     },

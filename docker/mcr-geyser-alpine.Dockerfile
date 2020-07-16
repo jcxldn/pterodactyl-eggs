@@ -12,4 +12,4 @@ WORKDIR /home/container
 
 COPY ./entrypoint.sh /runner/ptero.entrypoint.sh
 
-CMD ["/bin/sh", "/runner/ptero.entrypoint.sh"]
+ENTRYPOINT ["/runner/ptero.entrypoint.sh"]
