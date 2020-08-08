@@ -3,7 +3,7 @@
         "version": "PTDL_v1"
     },
     "exported_at": "2020-07-13T06:53:00-00:00",
-    "name": "Geyser (MCR Alpine, Autoupdating)",
+    "name": "Geyser (MCR Alpine, Autoupdating) [v1.0 beta]",
     "author": "ddd@jcx.ovh",
     "description": "Minecraft Bedrock <--> Java proxy.",
     "image": "jcxldn/pterodactyl-runners:mcr-geyser-alpine",
@@ -24,12 +24,21 @@
     "variables": [
         {
             "name": "Branch",
-            "description": "The branch to download Geyser from.",
+            "description": "The GitHub branch to download Geyser from.",
             "env_variable": "OVERRIDE_BRANCH",
             "default_value": "master",
             "user_viewable": 1,
             "user_editable": 1,
-            "rules": "required|string|max:20"
+            "rules": "required|string"
+        },
+        {
+            "name": "(Optional) Override Jar Path",
+            "description": "Set this value to the path of a jar (/home/container/$X) to skip the automatic download and run it directly.",
+            "env_variable": "OVERRIDE_JAR_PATH",
+            "default_value": "",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "nullable|string"
         }
     ]
 }

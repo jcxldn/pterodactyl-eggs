@@ -3,7 +3,7 @@
         "version": "PTDL_v1"
     },
     "exported_at": "2020-07-13T06:53:00-00:00",
-    "name": "Waterfall (MCR Alpine, Autoupdating)",
+    "name": "Waterfall (MCR Alpine, Autoupdating) [v1.0 beta]",
     "author": "ddd@jcx.ovh",
     "description": "High performance fork of the well-known BungeeCord server teleportation suite.",
     "image": "jcxldn/pterodactyl-runners:mcr-waterfall-alpine",
@@ -23,22 +23,22 @@
     },
     "variables": [
         {
-            "name": "Minecraft Version",
+            "name": "(Optional) Minecraft Version",
             "description": "The version of minecraft (e.g. \"1.16.1\") to download. \r\n\r\nLeave blank to always get the latest version.",
             "env_variable": "OVERRIDE_VERSION",
             "default_value": "",
             "user_viewable": 1,
             "user_editable": 1,
-            "rules": "nullable|string|max:20"
+            "rules": "nullable|string|max:10"
         },
         {
-            "name": "Build Number",
-            "description": "The build number for the waterfall release.\r\n\r\nLeave at latest to always get the latest version.",
-            "env_variable": "OVERRIDE_BUILD_NUMBER",
-            "default_value": "latest",
+            "name": "(Optional) Override Jar Path",
+            "description": "Set this value to the path of a jar (/home/container/$X) to skip the automatic download and run it directly.",
+            "env_variable": "OVERRIDE_JAR_PATH",
+            "default_value": "",
             "user_viewable": 1,
             "user_editable": 1,
-            "rules": "required|string|max:20"
+            "rules": "nullable|string"
         }
     ]
 }
