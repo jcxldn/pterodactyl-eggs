@@ -3,7 +3,7 @@
         "version": "PTDL_v1"
     },
     "exported_at": "2020-07-13T06:53:00-00:00",
-    "name": "Paper (Java 14)",
+    "name": "Paper (Java 14) [Deprecated]",
     "author": "ddd@jcx.ovh",
     "description": "High performance Spigot fork that aims to fix gameplay and mechanics inconsistencies.",
     "image": "jcxldn/pterodactyl-runners:14-jre",
