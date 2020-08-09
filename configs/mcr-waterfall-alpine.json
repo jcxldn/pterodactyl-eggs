@@ -3,11 +3,11 @@
         "version": "PTDL_v1"
     },
     "exported_at": "2020-07-13T06:53:00-00:00",
-    "name": "Waterfall (MCR Alpine, Autoupdating) [v1.0 beta]",
+    "name": "Waterfall (MCR Alpine, Autoupdating) [v1.1 beta]",
     "author": "ddd@jcx.ovh",
     "description": "High performance fork of the well-known BungeeCord server teleportation suite.",
     "image": "jcxldn/pterodactyl-runners:mcr-waterfall-alpine",
-    "startup": "/runner/entrypoint -Dterminal.jline=false -Dterminal.ansi=true -Xms128M -Xmx{{SERVER_MEMORY}}M",
+    "startup": "/runner/entrypoint -Djava.net.preferIPv4Stack=true -Dterminal.jline=false -Dterminal.ansi=true -Xms128M -Xmx{{SERVER_MEMORY}}M",
     "config": {
         "files": "{\r\n    \"config.yml\": {\r\n        \"parser\": \"yaml\",\r\n        \"find\": {\r\n            \"listeners[0].host\": \"0.0.0.0:{{server.build.default.port}}\",\r\n            \"servers.*.address\": {\r\n                \"127.0.0.1\": \"{{config.docker.interface}}\",\r\n                \"localhost\": \"{{config.docker.interface}}\"\r\n            }\r\n        }\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \"Listening on \",\r\n    \"userInteraction\": [\r\n        \"Listening on \/0.0.0.0:\"\r\n    ]\r\n}",

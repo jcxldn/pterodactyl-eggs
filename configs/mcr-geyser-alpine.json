@@ -3,11 +3,11 @@
         "version": "PTDL_v1"
     },
     "exported_at": "2020-07-13T06:53:00-00:00",
-    "name": "Geyser (MCR Alpine, Autoupdating) [v1.0 beta]",
+    "name": "Geyser (MCR Alpine, Autoupdating) [v1.1 beta]",
     "author": "ddd@jcx.ovh",
     "description": "Minecraft Bedrock <--> Java proxy.",
     "image": "jcxldn/pterodactyl-runners:mcr-geyser-alpine",
-    "startup": "/runner/entrypoint -Dterminal.jline=false -Dterminal.ansi=true -Xms128M -Xmx{{SERVER_MEMORY}}M",
+    "startup": "/runner/entrypoint -Djava.net.preferIPv4Stack=true -Dterminal.jline=false -Dterminal.ansi=true -Xms128M -Xmx{{SERVER_MEMORY}}M",
     "config": {
         "files": "{\r\n    \"config.yml\": {\r\n        \"parser\": \"yaml\",\r\n        \"find\": {\r\n            \"bedrock.address\": \"0.0.0.0\",\r\n            \"bedrock.port\": \"{{server.build.default.port}}\"\r\n        }\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \")! Run /geyser help \",\r\n    \"userInteraction\": [\r\n        \"Go to eula.txt for more info.\"\r\n    ]\r\n}",
