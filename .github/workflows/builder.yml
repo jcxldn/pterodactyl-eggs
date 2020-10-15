@@ -7,6 +7,7 @@ on:
 jobs:
   job-14-jre:
     runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message, 'ci skip')"
     steps:
       -
         name: Checkout
@@ -14,12 +15,11 @@ jobs:
       -
         name: Login to Docker Hub
         run: echo "${{ secrets.REGISTRY_PASSWORD }}" | docker login -u "${{ secrets.REGISTRY_USERNAME }}" --password-stdin
+        if: github.ref == 'refs/heads/master'
       - 
         name: Set up Docker Buildx
         id: buildx
-        uses: crazy-max/ghaction-docker-buildx@v1
-        with:
-          version: latest
+        uses: crazy-max/ghaction-docker-buildx@v3.3.0
       -
         name: List Available platforms
         run: echo ${{ steps.buildx.outputs.platforms }}
@@ -33,8 +33,12 @@ jobs:
             --platform linux/amd64,linux/arm64,linux/armhf,linux/s390x \
             --output "type=image,push=true" \
             -f jre14.Dockerfile -t jcxldn/pterodactyl-runners:14-jre .
-  job-mcr-paper-alpine:
+  job-mcr:
     runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message, 'ci skip')"
+    strategy:
+      matrix: 
+        build: ["mcr-paper-alpine", "mcr-waterfall-alpine", "mcr-geyser-alpine"]
     steps:
       -
         name: Checkout
@@ -42,12 +46,11 @@ jobs:
       -
         name: Login to Docker Hub
         run: echo "${{ secrets.REGISTRY_PASSWORD }}" | docker login -u "${{ secrets.REGISTRY_USERNAME }}" --password-stdin
+        if: github.ref == 'refs/heads/master'
       - 
         name: Set up Docker Buildx
         id: buildx
-        uses: crazy-max/ghaction-docker-buildx@v1
-        with:
-          version: latest
+        uses: crazy-max/ghaction-docker-buildx@v3.3.0
       -
         name: List Available platforms
         run: echo ${{ steps.buildx.outputs.platforms }}
@@ -58,57 +61,4 @@ jobs:
           docker buildx build \
             --platform linux/amd64 \
             --output "type=image,push=true" \
-            -f mcr-paper-alpine.Dockerfile -t jcxldn/pterodactyl-runners:mcr-paper-alpine .
-  job-mcr-waterfall-alpine:
-    runs-on: ubuntu-latest
-    steps:
-      -
-        name: Checkout
-        uses: actions/checkout@v1
-      -
-        name: Login to Docker Hub
-        run: echo "${{ secrets.REGISTRY_PASSWORD }}" | docker login -u "${{ secrets.REGISTRY_USERNAME }}" --password-stdin
-      - 
-        name: Set up Docker Buildx
-        id: buildx
-        uses: crazy-max/ghaction-docker-buildx@v1
-        with:
-          version: latest
-      -
-        name: List Available platforms
-        run: echo ${{ steps.buildx.outputs.platforms }}
-      -
-        name: Run Buildx
-        run: |
-          cd docker
-          docker buildx build \
-            --platform linux/amd64 \
-            --output "type=image,push=true" \
-            -f mcr-waterfall-alpine.Dockerfile -t jcxldn/pterodactyl-runners:mcr-waterfall-alpine .
-
-  job-mcr-geyser-alpine:
-    runs-on: ubuntu-latest
-    steps:
-      -
-        name: Checkout
-        uses: actions/checkout@v1
-      -
-        name: Login to Docker Hub
-        run: echo "${{ secrets.REGISTRY_PASSWORD }}" | docker login -u "${{ secrets.REGISTRY_USERNAME }}" --password-stdin
-      - 
-        name: Set up Docker Buildx
-        id: buildx
-        uses: crazy-max/ghaction-docker-buildx@v1
-        with:
-          version: latest
-      -
-        name: List Available platforms
-        run: echo ${{ steps.buildx.outputs.platforms }}
-      -
-        name: Run Buildx
-        run: |
-          cd docker
-          docker buildx build \
-            --platform linux/amd64 \
-            --output "type=image,push=true" \
-            -f mcr-geyser-alpine.Dockerfile -t jcxldn/pterodactyl-runners:mcr-geyser-alpine .
+            -f ${{ matrix.build }}.Dockerfile -t jcxldn/pterodactyl-runners:${{ matrix.build }} .
