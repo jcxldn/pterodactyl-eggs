@@ -9,6 +9,8 @@ echo "ptero-entrypoint > Welcome! In Directory: '$(pwd)'"
 # Output Current Java Version
 java -version ## only really needed to show what version is being used. Should be changed for different applications
 
+# Output current glibc version (jcxldn/openjdk-alpine based images)
+echo "glibc version $(ls /usr/glibc-compat/lib | grep ld-.*\.so$ | cut -d- -f2 | awk -F '[.so]' '{print $1"."$2}')"
 
 echo "ptero-entrypoint > Replacing startup variables..."
 
