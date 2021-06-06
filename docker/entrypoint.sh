@@ -16,6 +16,15 @@ echo "ptero-entrypoint > Replacing startup variables..."
 
 # Replace Startup Variables
 MODIFIED_STARTUP=`eval echo $(echo ${STARTUP} | sed -e 's/{{/${/g' -e 's/}}/}/g')`
+
+# Generate -Xmx and -Xms values based on pterodactyl SERVER_MEMORY env
+# Then append to MODIFIED_STARTUP
+echo "ptero-entrypoint > Found SERVER_MEMORY var with value '$SERVER_MEMORY'"
+
+# Leave 256M of allocated memory unused
+# Start with 1/4th of allocated memory
+MODIFIED_STARTUP="$MODIFIED_STARTUP -Drunner.automatic.mem=true -Xmx$(expr $SERVER_MEMORY - 256)M -Xms$(expr $SERVER_MEMORY / 4)M"
+
 echo ":/home/container$ ${MODIFIED_STARTUP}"
 
 echo "ptero-entrypoint > Starting server with: '$MODIFIED_STARTUP'"
