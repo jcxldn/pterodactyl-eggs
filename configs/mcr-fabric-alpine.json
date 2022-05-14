@@ -5,7 +5,7 @@
     "exported_at": "2020-07-13T06:53:00-00:00",
     "name": "Fabric (MCR Alpine, Autoupdating) [v1.1 beta]",
     "author": "ddd@jcx.ovh",
-    "description": "High performance Spigot fork that aims to fix gameplay and mechanics inconsistencies.",
+    "description": "Fabric is a lightweight, experimental modding toolchain for Minecraft.",
     "image": "jcxldn/pterodactyl-runners:mcr-fabric-alpine",
     "startup": "/runner/entrypoint -Djava.net.preferIPv4Stack=true -Dterminal.jline=false -Dterminal.ansi=true -Xms128M -Xmx{{SERVER_MEMORY}}M",
     "config": {
@@ -23,8 +23,8 @@
     },
     "variables": [
         {
-            "name": "(Optional) Minecraft Version",
-            "description": "The version of minecraft (e.g. \"1.16.1\") to download. \r\n\r\nLeave blank to always get the latest version.",
+            "name": "(Optional) Minecraft / Fabric Loader / Fabric Installer versions",
+            "description": "The versions of minecraft, the fabric loader, and the fabric installer (seperated by a slash \"/\") (e.g. \"1.18.2/0.14.5/0.10.2\") to download. \r\n\r\nLeave blank to always get the latest (stable) versions.",
             "env_variable": "OVERRIDE_VERSION",
             "default_value": "",
             "user_viewable": 1,
