@@ -7,7 +7,7 @@
     "author": "ddd@jcx.ovh",
     "description": "High performance fork of the well-known BungeeCord server teleportation suite.",
     "image": "jcxldn/pterodactyl-runners:mcr-waterfall-alpine",
-    "startup": "/runner/entrypoint -Djava.net.preferIPv4Stack=true -Dterminal.jline=false -Dterminal.ansi=true -Xms128M -Xmx{{SERVER_MEMORY}}M",
+    "startup": "/runner/entrypoint -Djava.net.preferIPv4Stack=true -Dterminal.jline=false -Dterminal.ansi=true",
     "config": {
         "_files_comment": "src: https://github.com/parkervcp/eggs/blob/21545c7478483910168c22d6f0cb02aa96c3cc1a/game_eggs/minecraft/proxy/java/velocity/egg-velocity.json#L22",
         "files": "{\r\n    \"config.yml\": {\r\n        \"parser\": \"yaml\",\r\n        \"find\": {\r\n            \"listeners[0].host\": \"0.0.0.0:{{server.build.default.port}}\",\r\n            \"servers.*.address\": {\r\n                \"127.0.0.1\": \"{{config.docker.interface}}\",\r\n                \"localhost\": \"{{config.docker.interface}}\"\r\n            }\r\n        }\r\n    }\r\n}",
