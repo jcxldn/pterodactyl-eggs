@@ -17,13 +17,21 @@ echo "ptero-entrypoint > Replacing startup variables..."
 # Replace Startup Variables
 MODIFIED_STARTUP=`eval echo $(echo ${STARTUP} | sed -e 's/{{/${/g' -e 's/}}/}/g')`
 
-# Generate -Xmx and -Xms values based on pterodactyl SERVER_MEMORY env
-# Then append to MODIFIED_STARTUP
-echo "ptero-entrypoint > Found SERVER_MEMORY var with value '$SERVER_MEMORY'"
+if [ ${SERVER_MEMORY} -eq 0 ]; then
+    # Server has no memory limit set!
+    echo "ptero-entrypoint > Found zeroed SERVER_MEMORY var! Will not attempt to dynamically create -Xms and -Xmx flags."
+    MODIFIED_STARTUP="$MODIFIED_STARTUP -Drunner.automatic.mem=false -Xms128M"
+else
+    # Server has a memory limit set, we can generate dynamic -Xmx and -Xms
 
-# Leave 256M of allocated memory unused
-# Start with 1/4th of allocated memory
-MODIFIED_STARTUP="$MODIFIED_STARTUP -Drunner.automatic.mem=true -Xmx$(expr $SERVER_MEMORY - 256)M -Xms$(expr $SERVER_MEMORY / 4)M"
+    # Generate -Xmx and -Xms values based on pterodactyl SERVER_MEMORY env
+    # Then append to MODIFIED_STARTUP
+    echo "ptero-entrypoint > Found SERVER_MEMORY var with value '$SERVER_MEMORY'"
+
+    # Leave 256M of allocated memory unused
+    # Start with 1/4th of allocated memory
+    MODIFIED_STARTUP="$MODIFIED_STARTUP -Drunner.automatic.mem=true -Xmx$(expr $SERVER_MEMORY - 256)M -Xms$(expr $SERVER_MEMORY / 4)M"
+fi
 
 echo ":/home/container$ ${MODIFIED_STARTUP}"
 
